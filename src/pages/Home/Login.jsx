@@ -68,7 +68,7 @@ const Login = () => {
                             <input className="btn bg-[#118acb] text-white" type="submit" value="Login" />
                         </div>
                     </form>
-                    <p className='text-center mb-6'><small>New here? <Link to="/signup" className='text-sky-600 underline'>Please Register</Link></small></p>
+                    <p className='text-center mb-6'><small>New here? <Link to="/signUp" className='text-sky-600 underline'>Please Register</Link></small></p>
                     {/* <SocialLogin></SocialLogin> */}
                 </div>
             </div>

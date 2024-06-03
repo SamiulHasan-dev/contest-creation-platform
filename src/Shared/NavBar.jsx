@@ -34,7 +34,7 @@ const NavBar = () => {
                 </div>
                 <div className="navbar-end gap-2">
                     <Link to="/login"><a className="btn btn-ghost text-[#1bc5bd]">Login</a></Link>
-                    <a className="btn bg-[#1bc5bd] text-white">Sign Up</a>
+                    <Link to='signUp'><a className="btn bg-[#1bc5bd] text-white">Sign Up</a></Link>
                 </div>
             </div>
         </div>
