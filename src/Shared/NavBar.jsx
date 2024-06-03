@@ -10,7 +10,7 @@ const NavBar = () => {
     </>
 
     return (
-        
+        <div>
             <div className="navbar ">
                 <div className="navbar-start ">
                     <div className="dropdown">
@@ -33,9 +33,11 @@ const NavBar = () => {
                 </div>
                 <div className="navbar-end gap-2">
                     <a className="btn btn-ghost text-[#1bc5bd]">Login</a>
-                    <a className="btn bg-[#1bc5bd] text-white">Button</a>
+                    <a className="btn bg-[#1bc5bd] text-white">Sign Up</a>
                 </div>
             </div>
+        </div>
+            
         
     );
 };
