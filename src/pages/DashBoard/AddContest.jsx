@@ -3,10 +3,62 @@ import { FaRegCalendarAlt } from "react-icons/fa";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
+import useAuth from "../../hooks/useAuth";
+// import Swal from "sweetalert2";
 
 
 const AddContest = () => {
     const [startDate, setStartDate] = useState(null);
+    const { user } = useAuth();
+
+    console.log(user);
+
+
+    const handleAddContest = event => {
+        event.preventDefault();
+
+        const form = event.target;
+        const contestName = form.contestName.value;
+        const contestImage = form.contestImage.value;
+        const contestPrice = form.contestPrice.value;
+        const priceMoney = form.priceMoney.value;
+        const taskInstruction = form.taskInstruction.value;
+        const contestType = form.contestType.value;
+        const contestDescription = form.contestDescription.value;
+        const contestDeadLine = form.contestDeadLine.value;
+        const name = user?.displayName;
+        const email = user?.email;
+        const image = user?.photoURL;
+        const participantCount = 0;
+        const adminComment = '';
+
+        const newProduct = { contestName, contestImage, contestPrice, priceMoney, taskInstruction, contestType, contestDescription, contestDeadLine, name, email, image, participantCount, adminComment }
+        console.log(newProduct);
+
+        // fetch('https://product-verse-server.vercel.app', {
+        //     method: 'POST',
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     body: JSON.stringify(newProduct)
+        // })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         console.log(data);
+        //         if (data.insertedId) {
+        //             Swal.fire({
+        //                 title: 'Success!',
+        //                 text: 'Product Added Successfully',
+        //                 icon: 'success',
+        //                 confirmButtonText: 'Awesome'
+        //             })
+        //         }
+        //     })
+
+        // form.reset();
+
+
+    }
 
 
     return (
@@ -14,7 +66,7 @@ const AddContest = () => {
             <h2 className="  font-bold mt-7 text-3xl text-center w-full ">Add Contest</h2>
             <div className="card shrink-0 w-full">
 
-                <form className="card-body">
+                <form onSubmit={handleAddContest} className="card-body">
                     <div className="flex flex-col lg:flex-row gap-5">
                         {/* row 1 Contest Name and Photo URL*/}
                         <div className="form-control flex-1">
@@ -83,7 +135,7 @@ const AddContest = () => {
                                 <span className="label-text font-semibold">Contest DeadLine</span>
                             </label>
                             <div className="input input-bordered relative flex items-center">
-                                <DatePicker name="date" selected={startDate} onChange={(date) => setStartDate(date)} />
+                                <DatePicker name="contestDeadLine" selected={startDate} onChange={(date) => setStartDate(date)} />
                                 <span className="absolute top-4 right-2">
                                     <FaRegCalendarAlt />
                                 </span>
@@ -96,7 +148,7 @@ const AddContest = () => {
 
 
                     <div className="form-control mt-6">
-                        <input type="submit" className="btn text-white bg-[#2d3142]" value="ADD QUERIES" />
+                        <input type="submit" className="btn text-white bg-[#2d3142]" value="ADD CONTEST" />
                     </div>
                 </form>
             </div>

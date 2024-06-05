@@ -34,30 +34,30 @@ const SignUp = () => {
                     }
                 });
                 navigate('/');
-                // updateUserProfile(data.name, data.photoURL)
-                //     .then(() => {
-                //         // create user entry in the database
-                //         const userInfo = {
-                //             name: data.name,
-                //             email: data.email
-                //         }
-                // axiosPublic.post('/users', userInfo)
-                //     .then(res => {
-                //         if (res.data.insertedId) {
-                //             console.log('user added to the database');
-                //             reset();
-                //             Swal.fire({
-                //                 position: 'top-end',
-                //                 icon: 'success',
-                //                 title: 'User created successfully.',
-                //                 showConfirmButton: false,
-                //                 timer: 1500
-                //             });
-                //             navigate('/');
-                //         }
-                //     })
-                // })
-                // .catch(error => console.log(error))
+                updateUserProfile(data.name, data.photoURL)
+                    .then(() => {
+                        // create user entry in the database
+                        const userInfo = {
+                            name: data.name,
+                            email: data.email
+                        }
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        if (res.data.insertedId) {
+                            console.log('user added to the database');
+                            reset();
+                            Swal.fire({
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'User created successfully.',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            navigate('/');
+                        }
+                    })
+                })
+                .catch(error => console.log(error))
             })
     }
 
