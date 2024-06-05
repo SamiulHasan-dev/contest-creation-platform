@@ -5,6 +5,7 @@ import Login from "../pages/Home/Login";
 import SignUp from "../pages/Home/SignUp";
 import DashBoard from "../pages/DashBoard/DashBoard";
 import AddContest from "../pages/DashBoard/AddContest";
+import CreateContest from "../pages/DashBoard/CreateContest";
 
 
 export const router = createBrowserRouter([
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
       {
         path: 'addContest',
         element: <AddContest></AddContest>
+      },
+      {
+        path: 'createdContest',
+        element: <CreateContest></CreateContest>
       }
     ]
   }

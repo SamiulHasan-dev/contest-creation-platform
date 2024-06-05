@@ -14,7 +14,7 @@ const DashBoard = () => {
         <div className="w-2/6 md:w-64 min-h-screen bg-[#6aa8a5]">
             <ul className="menu p-4">
                 <li><NavLink to="/dashboard/addContest"><MdOutlinePostAdd className="text-xl" /> Add Contest</NavLink></li>
-                <li><NavLink to="/dashboard/addPost"><MdOutlinePendingActions className="text-xl" /> My Created Contest</NavLink></li>
+                <li><NavLink to="/dashboard/createdContest"><MdOutlinePendingActions className="text-xl" /> My Created Contest</NavLink></li>
                 <li><NavLink to="/dashboard/myPost"><BsPostcardHeart className="text-xl" /> Contest submitted</NavLink></li>
 
                 {/* {

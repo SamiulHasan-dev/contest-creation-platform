@@ -4,24 +4,27 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 // import Swal from "sweetalert2";
 
 
 const AddContest = () => {
     const [startDate, setStartDate] = useState(null);
     const { user } = useAuth();
+    const axiosPublic = useAxiosPublic();
 
     console.log(user);
 
 
-    const handleAddContest = event => {
+    const handleAddContest = async (event) => {
         event.preventDefault();
 
         const form = event.target;
         const contestName = form.contestName.value;
         const contestImage = form.contestImage.value;
-        const contestPrice = form.contestPrice.value;
-        const priceMoney = form.priceMoney.value;
+        const contestPrice = parseInt(form.contestPrice.value);
+        const priceMoney = parseInt(form.priceMoney.value);
         const taskInstruction = form.taskInstruction.value;
         const contestType = form.contestType.value;
         const contestDescription = form.contestDescription.value;
@@ -30,34 +33,25 @@ const AddContest = () => {
         const email = user?.email;
         const image = user?.photoURL;
         const participantCount = 0;
+        const status = 'pending'
         const adminComment = '';
 
-        const newProduct = { contestName, contestImage, contestPrice, priceMoney, taskInstruction, contestType, contestDescription, contestDeadLine, name, email, image, participantCount, adminComment }
-        console.log(newProduct);
+        const newContest = { contestName, contestImage, contestPrice, priceMoney, taskInstruction, contestType, contestDescription, contestDeadLine, name, email, image, participantCount,status, adminComment }
+        console.log(newContest);
 
-        // fetch('https://product-verse-server.vercel.app', {
-        //     method: 'POST',
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify(newProduct)
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         console.log(data);
-        //         if (data.insertedId) {
-        //             Swal.fire({
-        //                 title: 'Success!',
-        //                 text: 'Product Added Successfully',
-        //                 icon: 'success',
-        //                 confirmButtonText: 'Awesome'
-        //             })
-        //         }
-        //     })
-
-        // form.reset();
-
-
+        const menuRes = await axiosPublic.post('/contests', newContest);
+            console.log(menuRes.data);
+            if(menuRes.data.insertedId){
+                Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title:'Contest Added Successfully',
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            }
+            form.reset();
+        
     }
 
 

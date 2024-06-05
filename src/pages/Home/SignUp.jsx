@@ -3,11 +3,13 @@ import { Link, useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import 'animate.css';
 import useAuth from "../../hooks/useAuth";
+import useAxiosPublic from "../../hooks/useAxiosPublic";
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser } = useAuth();
+    const { createUser, updateUserProfile } = useAuth();
     const navigate = useNavigate();
+    const axiosPublic = useAxiosPublic();
 
     const onSubmit = data => {
         console.log(data);
@@ -16,48 +18,42 @@ const SignUp = () => {
             .then(result => {
                 const loggedUser = result.user;
                 console.log(loggedUser);
-                Swal.fire({
-                    title: "User Login Successfully",
-                    showClass: {
-                        popup: `
-                        animate__animated
-                        animate__fadeInUp
-                        animate__faster
-                      `
-                    },
-                    hideClass: {
-                        popup: `
-                        animate__animated
-                        animate__fadeOutDown
-                        animate__faster
-                      `
-                    }
-                });
-                navigate('/');
+
                 updateUserProfile(data.name, data.photoURL)
                     .then(() => {
                         // create user entry in the database
                         const userInfo = {
                             name: data.name,
+                            photo: data.photoURL,
                             email: data.email
                         }
-                axiosPublic.post('/users', userInfo)
-                    .then(res => {
-                        if (res.data.insertedId) {
-                            console.log('user added to the database');
-                            reset();
-                            Swal.fire({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'User created successfully.',
-                                showConfirmButton: false,
-                                timer: 1500
-                            });
-                            navigate('/');
-                        }
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    console.log('user added to the database');
+                                    // reset();
+                                    Swal.fire({
+                                        title: "User Login Successfully",
+                                        showClass: {
+                                            popup: `
+                                                animate__animated
+                                                animate__fadeInUp
+                                                animate__faster
+                                            `
+                                        },
+                                        hideClass: {
+                                            popup: `
+                                                animate__animated
+                                                animate__fadeOutDown
+                                                animate__faster
+                                            `
+                                        }
+                                    });
+                                    navigate('/');
+                                }
+                            })
                     })
-                })
-                .catch(error => console.log(error))
+                    .catch(error => console.log(error))
             })
     }
 
