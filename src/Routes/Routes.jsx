@@ -6,6 +6,9 @@ import SignUp from "../pages/Home/SignUp";
 import DashBoard from "../pages/DashBoard/DashBoard";
 import AddContest from "../pages/DashBoard/AddContest";
 import CreateContest from "../pages/DashBoard/CreateContest";
+import Update from "../pages/DashBoard/Update";
+import PrivateRoute from "./PrivateRoute";
+
 
 
 export const router = createBrowserRouter([
@@ -38,6 +41,11 @@ export const router = createBrowserRouter([
       {
         path: 'createdContest',
         element: <CreateContest></CreateContest>
+      },
+      {
+        path: 'createdContest/update/:id',
+        element: <PrivateRoute><Update></Update></PrivateRoute>,
+        loader: ({params})=> fetch(`http://localhost:5000/contest/${params.id}`)
       }
     ]
   }
