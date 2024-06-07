@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
-import { FaTrashAlt, FaUsers } from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
 
@@ -28,6 +28,23 @@ const ManegeUser = () => {
                     position: "top-end",
                     icon: "success",
                     title: `${user.name} is an Admin Now!`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            }
+        })
+    }
+
+    const handleMakeCreator = user => {
+        axiosSecure.patch(`/users/creator/${user._id}`)
+        .then(res => {
+            console.log(res.data);
+            if(res.data.modifiedCount > 0) {
+                refetch();
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `${user.name} is an Creator Now!`,
                     showConfirmButton: false,
                     timer: 1500
                   });
@@ -104,7 +121,7 @@ const ManegeUser = () => {
                                 <th>Name</th>
                                 <th>Email</th>
                                 <th></th>
-                                <th>Make Admin</th>
+                                <th>Make Role</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -116,7 +133,15 @@ const ManegeUser = () => {
                                     <td>{user.email}</td>
                                     <td></td>
                                     <td>
-                                    { user.role === 'admin' ? 'Admin' : <button onClick={() => handleMakeAdmin(user)} className="btn bg-[#d2e3fd] btn-md"><FaUsers /></button>}
+                                    { user.role === 'admin' ? 'Admin' :
+                                         user.role ==="creator" ? "Creator" : 
+                                         <details className="dropdown">
+                                         <summary className="m-1 btn">Change Role</summary>
+                                         <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                                           <li><a onClick={() => handleMakeAdmin(user)}>Admin</a></li>
+                                           <li><a onClick={() => handleMakeCreator(user)}>creator</a></li>
+                                         </ul>
+                                       </details>}
                                     </td>
                                     <td>
                                     <button onClick={() => handleDeleteUser(user)} className="btn btn-error btn-md"><FaTrashAlt /></button>
@@ -132,3 +157,13 @@ const ManegeUser = () => {
 };
 
 export default ManegeUser;
+
+{/* <details className="dropdown">
+  <summary className="m-1 btn">open or close</summary>
+  <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+    <li><a>Item 1</a></li>
+    <li><a>Item 2</a></li>
+  </ul>
+</details> */}
+
+{/* <button onClick={() => handleMakeAdmin(user)} className="btn bg-[#d2e3fd] btn-md"><FaUsers /></button> */}

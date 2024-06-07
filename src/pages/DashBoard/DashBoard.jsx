@@ -1,13 +1,17 @@
 import { BsPostcardHeart } from "react-icons/bs";
 
-import { FaBook, FaHome, FaList, FaUsers, FaUtensils } from "react-icons/fa";
+import { FaBook, FaHome, FaUsers, } from "react-icons/fa";
 import { MdOutlinePendingActions, MdOutlinePostAdd } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../../hooks/useAdmin";
+import useCreator from "../../hooks/useCreator";
 
 const DashBoard = () => {
 
     const [isAdmin] = useAdmin();
+    const [isCreator] = useCreator();
+    console.log(isAdmin);
+    console.log(isCreator);
 
 
 
@@ -20,20 +24,21 @@ const DashBoard = () => {
 
                     {
                         isAdmin ? <>
-                            <li><NavLink to="/dashboard/adminHome"><FaHome /> Admin Home</NavLink></li>
-                            <li><NavLink to="/dashboard/addItems"><FaUtensils /> Add Items</NavLink></li>
-                            <li><NavLink to="/dashboard/manageItems"><FaList /> Manage Items</NavLink></li>
-                            <li><NavLink to="/dashboard/bookings"><FaBook /> Manage Bookings</NavLink></li>
-                            <li><NavLink to="/dashboard/manageUser"><FaUsers /> All Users</NavLink></li>
-                            
-                        </>
-                            :
-                            <>
-                            <li><NavLink to="/dashboard/manageUser"><FaUsers /> All Users</NavLink></li>
-                                <li><NavLink to="/dashboard/addContest"><MdOutlinePostAdd className="text-xl" /> Add Contest</NavLink></li>
-                                <li><NavLink to="/dashboard/createdContest"><MdOutlinePendingActions className="text-xl" /> My Created Contest</NavLink></li>
-                                <li><NavLink to="/dashboard/myPost"><BsPostcardHeart className="text-xl" /> Contest submitted</NavLink></li>
+                            <li><NavLink to="/dashboard/manageUser"><FaUsers /> Manage Users</NavLink></li>
+                            <li><NavLink to="/dashboard/bookings"><FaBook /> Manage Contests</NavLink></li>
                             </>
+                            : isCreator ?
+                                <>
+                                    <li><NavLink to="/dashboard/addContest"><MdOutlinePostAdd className="text-xl" /> Add Contest</NavLink></li>
+                                    <li><NavLink to="/dashboard/createdContest"><MdOutlinePendingActions className="text-xl" /> My Created Contest</NavLink></li>
+                                    <li><NavLink to="/dashboard/contestSubmitted"><BsPostcardHeart className="text-xl" /> Contest submitted</NavLink></li>
+                                </>
+                                :
+                                <>
+                                    <li><NavLink to="/dashboard/myProfile"><MdOutlinePendingActions className="text-xl" /> My Profile</NavLink></li>
+                                    <li><NavLink to="/dashboard/participatedContest"><MdOutlinePendingActions className="text-xl" /> My Participated Contest</NavLink></li>
+                                    <li><NavLink to="/dashboard/winningContest"><MdOutlinePendingActions className="text-xl" /> My Winning Contest</NavLink></li>
+                                </>
                     }
 
                     {/* shared nav links */}
