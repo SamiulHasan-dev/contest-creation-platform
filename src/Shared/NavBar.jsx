@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import logo from '../../public/logo.png'
 import useAuth from '../hooks/useAuth';
 
@@ -13,10 +13,10 @@ const NavBar = () => {
     }
 
     const navLink = <>
-        <li><a>Home</a></li>
-        <li><a>All Contest</a></li>
+        <li><NavLink className={({ isActive }) => isActive ? 'font-bold ' : ' font-normal'} to="/">Home</NavLink></li>
+        <li><NavLink className={({ isActive }) => isActive ? 'font-bold ' : ' font-normal'} to="/allContest">All Contest</NavLink></li>
         <li><a>Sectors</a></li>
-        <li><a>Services</a></li> 
+        <li><a>Services</a></li>
     </>
 
     return (
@@ -42,37 +42,37 @@ const NavBar = () => {
                     </ul>
                 </div>
                 {user ? (
-                <div className="navbar-end">
-                    <div className="flex items-center gap-3">
-                        <div className="dropdown dropdown-end">
-                            <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
-                                <div className="w-10 rounded-full">
-                                    <img
-                                        alt="user pic"
-                                        src={user?.photoURL || "https://i.ibb.co/p3d9pYn/user.png"}
-                                    />
+                    <div className="navbar-end">
+                        <div className="flex items-center gap-3">
+                            <div className="dropdown dropdown-end">
+                                <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
+                                    <div className="w-10 rounded-full">
+                                        <img
+                                            alt="user pic"
+                                            src={user?.photoURL || "https://i.ibb.co/p3d9pYn/user.png"}
+                                        />
+                                    </div>
                                 </div>
+                                <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                                    <li>{user.displayName}</li>
+                                    <li><Link to='/dashboard'>Dashboard</Link></li>
+                                    <li><Link onClick={handleLogOut}>Log Out</Link></li>
+                                </ul>
                             </div>
-                            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                                <li>{user.displayName}</li>
-                                <li><Link to='/dashboard'>Dashboard</Link></li>
-                                <li><Link onClick={handleLogOut}>Log Out</Link></li>
-                            </ul>
                         </div>
                     </div>
-                </div>
-            ) : (
-                <>
-                    <div className="navbar-end">
-                    <Link to="/login"><a className="btn btn-ghost text-[#1bc5bd]">Login</a></Link>
-                    <Link to='signUp'><a className="btn bg-[#1bc5bd] text-white">Sign Up</a></Link>
-                    </div>
-                </>
-            )}
+                ) : (
+                    <>
+                        <div className="navbar-end">
+                            <Link to="/login"><a className="btn btn-ghost text-[#1bc5bd]">Login</a></Link>
+                            <Link to='signUp'><a className="btn bg-[#1bc5bd] text-white">Sign Up</a></Link>
+                        </div>
+                    </>
+                )}
             </div>
         </div>
-            
-        
+
+
     );
 };
 

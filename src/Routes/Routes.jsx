@@ -8,6 +8,7 @@ import AddContest from "../pages/DashBoard/AddContest";
 import CreateContest from "../pages/DashBoard/CreateContest";
 import Update from "../pages/DashBoard/Update";
 import PrivateRoute from "./PrivateRoute";
+import AllContest from "../pages/AllContest/AllContest";
 
 
 
@@ -27,6 +28,10 @@ export const router = createBrowserRouter([
       {
         path: '/signUp',
         element: <SignUp></SignUp>
+      },
+      {
+        path: 'allContest',
+        element: <AllContest></AllContest>
       }
     ]
   },
