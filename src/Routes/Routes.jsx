@@ -9,6 +9,7 @@ import CreateContest from "../pages/DashBoard/CreateContest";
 import Update from "../pages/DashBoard/Update";
 import PrivateRoute from "./PrivateRoute";
 import AllContest from "../pages/AllContest/AllContest";
+import ContestDetails from "../pages/ContestDetails/ContestDetails";
 
 
 
@@ -32,6 +33,11 @@ export const router = createBrowserRouter([
       {
         path: 'allContest',
         element: <AllContest></AllContest>
+      },
+      {
+        path: '/contestDetails/:id',
+        element: <ContestDetails></ContestDetails>,
+        loader: ({params})=> fetch(`http://localhost:5000/contest/${params.id}`)
       }
     ]
   },

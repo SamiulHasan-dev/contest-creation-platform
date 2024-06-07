@@ -15,7 +15,7 @@ const AllContest = () => {
 
     return (
         <div>
-            <h2 className="  font-bold my-9 text-3xl text-center w-full ">All Contest</h2>
+            <h2 className="text-4xl font-extrabold my-9 text-center w-full ">All Contest</h2>
             <div className="card shrink-0 w-full"></div>
 
             <div>
@@ -33,7 +33,7 @@ const AllContest = () => {
                                 <p>Description: {item.contestDescription}</p>
                                 </div>
                                 <div className="card-actions">
-                                    <Link className="w-full" to={`/postDetails/${item._id}`}><button className="btn w-full bg-[#118acb] text-white">View Details</button></Link>
+                                    <Link className="w-full" to={`/contestDetails/${item._id}`}><button className="btn w-full bg-[#118acb] text-white">View Details</button></Link>
                                 </div>
                             </div>
                         </div>)
