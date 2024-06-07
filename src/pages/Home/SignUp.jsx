@@ -4,10 +4,11 @@ import Swal from "sweetalert2";
 import 'animate.css';
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
+import { FaGoogle } from "react-icons/fa";
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const { createUser, updateUserProfile } = useAuth();
+    const { createUser, updateUserProfile, googleSignIn } = useAuth();
     const navigate = useNavigate();
     const axiosPublic = useAxiosPublic();
 
@@ -57,6 +58,23 @@ const SignUp = () => {
             })
     }
 
+    const handleGoogleSignIn = () => {
+        googleSignIn()
+            .then(result => {
+                console.log(result.user);
+                const userInfo = {
+                    email: result.user?.email,
+                    name: result.user?.displayName,
+                    photo: result.user?.photoURL,
+                }
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        console.log(res.data);
+                        navigate('/');
+                    })
+            })
+    }
+
     return (
         <div className="max-w-6xl mx-auto">
             <div className="hero min-h-screen">
@@ -102,6 +120,9 @@ const SignUp = () => {
                                 <input className="btn bg-[#118acb] text-white" type="submit" value="Sign Up" />
                             </div>
                         </form>
+                        <div className="w-full px-7">
+                            <button onClick={handleGoogleSignIn} className="btn bg-[#118acb] w-full text-white">Login with Google <FaGoogle /></button>
+                        </div>
                         <p className='text-center mb-6'><small>Already Have an Account? <Link to="/login" className='text-sky-600 underline'>Please Login</Link></small></p>
                     </div>
                 </div>
