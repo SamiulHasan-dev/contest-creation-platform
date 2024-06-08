@@ -25,7 +25,7 @@ const DashBoard = () => {
                     {
                         isAdmin ? <>
                             <li><NavLink to="/dashboard/manageUser"><FaUsers /> Manage Users</NavLink></li>
-                            <li><NavLink to="/dashboard/bookings"><FaBook /> Manage Contests</NavLink></li>
+                            <li><NavLink to="/dashboard/manageContest"><FaBook /> Manage Contests</NavLink></li>
                             </>
                             : isCreator ?
                                 <>

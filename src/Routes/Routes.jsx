@@ -11,6 +11,7 @@ import PrivateRoute from "./PrivateRoute";
 import AllContest from "../pages/AllContest/AllContest";
 import ContestDetails from "../pages/ContestDetails/ContestDetails";
 import ManegeUser from "../pages/DashBoard/ManegeUser";
+import ManageContest from "../pages/DashBoard/ManageContest";
 
 
 
@@ -63,6 +64,10 @@ export const router = createBrowserRouter([
       {
         path: 'manageUser',
         element: <ManegeUser></ManegeUser>
+      },
+      {
+        path: 'manageContest',
+        element: <ManageContest></ManageContest>,
       }
     ]
   }

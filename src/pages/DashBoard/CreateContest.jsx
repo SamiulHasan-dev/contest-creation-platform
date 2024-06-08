@@ -50,8 +50,8 @@ const CreateContest = () => {
                         <tr>
                             <th>#</th>
                             <th>Contest Name</th>
-                            <th>Contest Type</th>
-                            <th>Price Money</th>
+                            <th>Comment</th>
+                            <th>Status</th>
                             <th>Update</th>
                             <th>Delete</th>
                         </tr>
@@ -61,14 +61,32 @@ const CreateContest = () => {
                             contests.map((item, index) => <tr key={item._id}>
                                 <th>{index + 1}</th>
                                 <td>{item.contestName}</td>
-                                <td>{item.contestType}</td>
-                                <td>{item.priceMoney}</td>
+                                <td>{item.adminComment && typeof item.adminComment === 'string' ? <span>{item.adminComment.slice(0, 15)}...</span> :  <p>-</p>  }</td>
+
+                                <td>{
+                                item.status === 'confirm' ? <p className="text-green-500 font-bold">confirmed</p>
+                                :
+                                item.status
+                                }</td>
+
                                 <td>
-                                    <Link to={`update/${item._id}`}>
-                                        <button className="btn btn-accent btn-md"><FaEdit /></button></Link>
+                                    {
+                                        item.status === 'pending' ? 
+                                        <Link to={`update/${item._id}`}>
+                                        <button className="btn btn-accent btn-md"><FaEdit /></button></Link> 
+                                        :
+                                        <Link>
+                                        <button disabled className="btn btn-accent btn-md"><FaEdit /></button></Link>
+                                    }
                                 </td>
                                 <td>
-                                    <button onClick={() => handleDeleteContest(item)} className="btn btn-error btn-md"><FaTrashAlt /></button>
+                                {
+                                        item.status === 'pending' ? 
+                                        <button onClick={() => handleDeleteContest(item)} className="btn btn-error btn-md"><FaTrashAlt /></button>
+                                        : 
+                                        <button disabled onClick={() => handleDeleteContest(item)} className="btn btn-error btn-md"><FaTrashAlt /></button>
+                                }
+                                    
                                 </td>
                             </tr>)
                         }

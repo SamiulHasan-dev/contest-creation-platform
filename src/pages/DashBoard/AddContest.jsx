@@ -33,10 +33,9 @@ const AddContest = () => {
         const email = user?.email;
         const image = user?.photoURL;
         const participantCount = 0;
-        const status = 'pending'
-        const adminComment = '';
+        const status = 'pending';
 
-        const newContest = { contestName, contestImage, contestPrice, priceMoney, taskInstruction, contestType, contestDescription, contestDeadLine, name, email, image, participantCount,status, adminComment }
+        const newContest = { contestName, contestImage, contestPrice, priceMoney, taskInstruction, contestType, contestDescription, contestDeadLine, name, email, image, participantCount,status }
         console.log(newContest);
 
         const menuRes = await axiosPublic.post('/contests', newContest);

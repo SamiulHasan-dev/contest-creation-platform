@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
 
 const AllContestHome = () => {
     const [searchText, setSearchText] = useState('');
@@ -62,7 +63,7 @@ const AllContestHome = () => {
                                     </div>
                                     <div className="card-actions">
                                         <Link className="w-full" to={`/contestDetails/${item._id}`}>
-                                            <button className="btn w-full bg-[#118acb] text-white">View Details</button>
+                                            <button className="btn w-full bg-[#118acb] text-white">View Details<span className="text-xl"><MdOutlineKeyboardArrowRight /></span></button>
                                         </Link>
                                     </div>
                                 </div>
