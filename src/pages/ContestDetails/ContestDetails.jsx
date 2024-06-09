@@ -26,7 +26,7 @@ const ContestDetails = () => {
                     </div>
                     <p><span className="font-bold text-base underline">Details:</span> {contests.contestDescription} </p>
                     <div className="text-center">
-                        <Link /* to={`/recommendationForm/${contests._id}`} */><button className="btn bg-[#2d3142] text-white w-full" >REGISTRATION</button></Link>
+                        <Link to="/payment"><button className="btn bg-[#118acb] text-white w-full" >REGISTRATION</button></Link>
                     </div>
                 </div>
                 </div>

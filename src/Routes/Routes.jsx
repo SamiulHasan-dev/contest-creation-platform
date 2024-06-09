@@ -13,6 +13,8 @@ import ContestDetails from "../pages/ContestDetails/ContestDetails";
 import ManegeUser from "../pages/DashBoard/ManegeUser";
 import ManageContest from "../pages/DashBoard/ManageContest";
 import ContestSubmitted from "../pages/DashBoard/ContestSubmitted";
+import MyProfile from "../pages/DashBoard/MyProfile";
+import Payment from "../pages/Payment/Payment";
 
 
 
@@ -41,6 +43,10 @@ export const router = createBrowserRouter([
         path: '/contestDetails/:id',
         element: <ContestDetails></ContestDetails>,
         loader: ({params})=> fetch(`http://localhost:5000/contest/${params.id}`)
+      },
+      {
+        path: '/payment',
+        element: <Payment></Payment>
       }
     ]
   },
@@ -73,6 +79,11 @@ export const router = createBrowserRouter([
       {
         path: 'manageContest',
         element: <ManageContest></ManageContest>,
+      },
+      //user
+      {
+        path: 'myProfile',
+        element: <MyProfile></MyProfile>
       }
     ]
   }

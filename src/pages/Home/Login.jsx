@@ -42,7 +42,9 @@ const Login = () => {
                 });
                 navigate(from, { replace: true });
             })
-            .catch(error => console.error(error))
+            .catch(error => {
+                alert('password incorrect')
+                console.error(error)})
     }
 
 

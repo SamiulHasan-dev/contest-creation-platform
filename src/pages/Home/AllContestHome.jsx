@@ -39,7 +39,7 @@ const AllContestHome = () => {
     return (
         <div className="bg-slate-100 p-5 rounded-lg">
             <form onSubmit={handleSearch}>
-                <label className="input input-bordered rounded-3xl flex items-center my-8 gap-2 w-1/2 mx-auto">
+                <label className="input input-bordered rounded-3xl flex items-center my-8 gap-2 w-4/5 md:w-1/2 mx-auto">
                     <input
                         type="text"
                         name="searchInput"
