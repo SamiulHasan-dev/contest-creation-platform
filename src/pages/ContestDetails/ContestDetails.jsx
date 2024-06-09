@@ -8,16 +8,17 @@ const ContestDetails = () => {
 
     return (
         <div className="max-w-5xl mx-auto my-14">
-            <h2 className="text-center font-bold text-3xl mt-5 mb-14">Details Contest</h2>
+            <h2 className="text-center font-bold text-[#118acb] text-3xl mb-14">Details Contest</h2>
             <div className="card lg:card-side bg-base-100 shadow-xl">
                 <div className="flex items-center flex-col md:flex-row">
                 <figure><img src={contests.contestImage} className="rounded-lg"  alt="Album" /></figure>
                 <div>
                 <div className="card-body space-y-4">
-                    <h2 className="card-title font-extrabold">{contests.contestName}</h2>
+                    <h2 className="card-title font-extrabold text-2xl">{contests.contestName}</h2>
                     <p><span className="font-bold text-base">Contest Type: </span> {contests.contestType}</p>
                     <p><span className="font-bold text-base">Contest DeadLine :</span> {contests.contestDeadLine}</p>
-                    <p><span className="font-bold text-base">Contest Prize:</span> ${contests.priceMoney}</p>
+                    <p><span className="font-bold text-base">Contest Price:</span> ${contests.contestPrice}</p>
+                    <p><span className="font-bold text-base">Winner Prize:</span> ${contests.priceMoney}</p>
 
                     <div className="card-actions">
                         <p><span className="font-bold text-base underline">Contest Added By:</span> {contests.name} </p>
@@ -26,7 +27,7 @@ const ContestDetails = () => {
                     </div>
                     <p><span className="font-bold text-base underline">Details:</span> {contests.contestDescription} </p>
                     <div className="text-center">
-                        <Link to="/payment"><button className="btn bg-[#118acb] text-white w-full" >REGISTRATION</button></Link>
+                        <Link to={`/payment/${contests._id}`}><button className="btn bg-[#118acb] text-white w-full" >REGISTRATION</button></Link>
                     </div>
                 </div>
                 </div>
