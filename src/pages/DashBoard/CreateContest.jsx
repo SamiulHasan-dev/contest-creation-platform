@@ -42,7 +42,7 @@ const CreateContest = () => {
 
     return (
         <div>
-            <h2 className="  font-bold mt-7 text-3xl text-center w-full ">My Created Contest</h2>
+            <h2 className="  font-extrabold mt-7 text-3xl text-center w-full ">My Created Contest</h2>
             <div className="overflow-x-auto">
                 <table className="table table-zebra mt-7">
                     {/* head */}

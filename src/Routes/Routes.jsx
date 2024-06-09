@@ -12,6 +12,7 @@ import AllContest from "../pages/AllContest/AllContest";
 import ContestDetails from "../pages/ContestDetails/ContestDetails";
 import ManegeUser from "../pages/DashBoard/ManegeUser";
 import ManageContest from "../pages/DashBoard/ManageContest";
+import ContestSubmitted from "../pages/DashBoard/ContestSubmitted";
 
 
 
@@ -59,6 +60,10 @@ export const router = createBrowserRouter([
         path: 'createdContest/update/:id',
         element: <PrivateRoute><Update></Update></PrivateRoute>,
         loader: ({params})=> fetch(`http://localhost:5000/contest/${params.id}`)
+      },
+      {
+        path: 'contestSubmitted',
+        element: <ContestSubmitted></ContestSubmitted>
       },
       //admin
       {

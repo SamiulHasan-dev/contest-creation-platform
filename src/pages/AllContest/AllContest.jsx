@@ -9,7 +9,11 @@ const AllContest = () => {
         queryKey: ['contests'],
         queryFn: async () => {
             const res = await axiosPublic.get('/contests');
-            return res.data;
+            
+            const status = res.data;
+            const confirm = status.filter(confirmStatus => confirmStatus.status === 'confirm');
+            console.log(confirm);
+            return confirm;
         }
     })
 
