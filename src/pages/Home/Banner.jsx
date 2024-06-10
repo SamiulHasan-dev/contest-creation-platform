@@ -2,7 +2,7 @@
 
 const Banner = () => {
     return (
-        <div>
+        <div className="p-5 md:px-10">
             <h1 className="text-4xl font-extrabold text-center mt-10 mb-14">Online Contests & Competitions</h1>
             <div className="flex flex-col md:flex-row items-center gap-6 my-9">
                 <div className="flex-1 p-5 ">

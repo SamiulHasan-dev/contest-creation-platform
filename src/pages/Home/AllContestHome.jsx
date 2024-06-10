@@ -53,7 +53,7 @@ const AllContestHome = () => {
             </form>
 
             <div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-5 md:px-5">
                     {
                         filteredQueries.slice(0, 5).map(item => (
                             <div key={item._id} className="card bg-base-100 shadow-xl">

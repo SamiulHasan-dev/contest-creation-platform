@@ -63,7 +63,7 @@ const ManegeUser = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.delete(`/users/${user._id}`)
+                axiosSecure.delete(`/usersDelete/${user._id}`)
                     .then(res => {
                         if (res.data.deletedCount > 0) {
                             refetch();
@@ -133,13 +133,17 @@ const ManegeUser = () => {
                                     <td>{user.email}</td>
                                     <td></td>
                                     <td>
-                                    { user.role === 'admin' ? 'Admin' :
-                                         user.role ==="creator" ? "Creator" : 
+                                    { user.role === 'admin' ? (
+                                                    <span className="text-blue-500 font-bold ml-6">Admin</span>
+                                                ) :
+                                         user.role ==="creator" ? (
+                                            <span className="text-yellow-500 font-bold ml-6">Creator</span>
+                                        ) : 
                                          <details className="dropdown">
-                                         <summary className="m-1 btn">Change Role</summary>
+                                         <summary className="m-1 btn btn-sm bg-orange-500 text-white">Change Role</summary>
                                          <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
                                            <li><a onClick={() => handleMakeAdmin(user)}>Admin</a></li>
-                                           <li><a onClick={() => handleMakeCreator(user)}>creator</a></li>
+                                           <li><a onClick={() => handleMakeCreator(user)}>Creator</a></li>
                                          </ul>
                                        </details>}
                                     </td>

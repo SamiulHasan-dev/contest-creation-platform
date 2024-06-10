@@ -161,8 +161,10 @@ const ManageContest = () => {
 
                                         <td>
                                             {
-                                                contest.status === 'confirm' ? "Confirm" : 
-                                                <button className="btn" onClick={()=>handleConfirm(contest)}>pending</button>
+                                                contest.status === 'confirm' ? (
+                                                    <span className="text-green-500 font-bold ml-3">Confirm</span>
+                                                ) : 
+                                                (<button className="btn btn-sm bg-orange-500 text-white" onClick={()=>handleConfirm(contest)}>pending</button>)
                                             }
                                             
                                         </td>

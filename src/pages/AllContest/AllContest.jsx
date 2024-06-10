@@ -23,7 +23,7 @@ const AllContest = () => {
             <div className="card shrink-0 w-full"></div>
 
             <div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-5 p-5 md:px-10">
                     {
                         contests.map(item=> <div key={item._id} className="card bg-base-100 shadow-xl">
                             <figure><img className="h-64 w-72 p-4" src={item.contestImage} alt="Shoes" /></figure>
