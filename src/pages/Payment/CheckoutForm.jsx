@@ -3,11 +3,13 @@ import { useEffect, useState } from "react";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 
 const CheckoutForm = ({ contest }) => {
     console.log(contest);
     const { contestPrice ,email, contestName,priceMoney,participantCount, contestType, taskInstruction, _id} = contest;
+    const navigate = useNavigate();
 
     const [error, setError] = useState();
     const [clientSecret, setClientSecret] = useState('');
@@ -110,7 +112,7 @@ const CheckoutForm = ({ contest }) => {
                       });
                 }
                 console.log(update.data);
-
+                navigate('/dashboard/participatedContest')
 
                
             }

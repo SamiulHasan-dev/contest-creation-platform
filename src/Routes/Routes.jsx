@@ -17,6 +17,8 @@ import MyProfile from "../pages/DashBoard/MyProfile";
 import Payment from "../pages/Payment/Payment";
 import MyParticipation from "../pages/DashBoard/MyParticipation";
 import SubmitContests from "../pages/AllContest/SubmitContests/SubmitContests";
+import ShowSubmission from "../pages/ShowSubmission/ShowSubmission";
+import WinningContest from "../pages/DashBoard/WinningContest";
 
 
 
@@ -97,6 +99,15 @@ export const router = createBrowserRouter([
         path: 'participatedContest/submit/:id',
         element: <SubmitContests></SubmitContests>,
         loader: ({params})=> fetch(`http://localhost:5000/paymentSingle/${params.id}`)
+      },
+      {
+        path: 'contestSubmitted/showSubmission/:contestId',
+        element: <ShowSubmission></ShowSubmission>,
+        loader: ({params})=> fetch(`http://localhost:5000/paymentSubmit/${params.contestId}`)
+      },
+      {
+        path: 'winningContest',
+        element: <WinningContest></WinningContest>
       }
     ]
   }

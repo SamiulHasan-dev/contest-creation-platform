@@ -24,7 +24,7 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 Swal.fire({
-                    title: "User Login Successfully",
+                    title: "Login Successfully",
                     showClass: {
                         popup: `
                         animate__animated

@@ -1,10 +1,12 @@
 import { BsPostcardHeart } from "react-icons/bs";
 
-import { FaBook, FaHome, FaUsers, } from "react-icons/fa";
+import { FaBook, FaHome, FaPortrait, FaUsers, } from "react-icons/fa";
 import { MdOutlinePendingActions, MdOutlinePostAdd } from "react-icons/md";
 import { NavLink, Outlet } from "react-router-dom";
 import useAdmin from "../../hooks/useAdmin";
 import useCreator from "../../hooks/useCreator";
+import { FaChalkboardUser } from "react-icons/fa6";
+import { GiPodiumWinner } from "react-icons/gi";
 
 const DashBoard = () => {
 
@@ -35,9 +37,9 @@ const DashBoard = () => {
                                 </>
                                 :
                                 <>
-                                    <li><NavLink to="/dashboard/myProfile"><MdOutlinePendingActions className="text-xl" /> My Profile</NavLink></li>
-                                    <li><NavLink to="/dashboard/participatedContest"><MdOutlinePendingActions className="text-xl" /> My Participated Contest</NavLink></li>
-                                    <li><NavLink to="/dashboard/winningContest"><MdOutlinePendingActions className="text-xl" /> My Winning Contest</NavLink></li>
+                                    <li><NavLink to="/dashboard/myProfile"><FaPortrait className="text-xl" /> My Profile</NavLink></li>
+                                    <li><NavLink to="/dashboard/participatedContest"><FaChalkboardUser className="text-xl" /> My Participated Contest</NavLink></li>
+                                    <li><NavLink to="/dashboard/winningContest"><GiPodiumWinner className="text-xl" /> My Winning Contest</NavLink></li>
                                 </>
                     }
 
