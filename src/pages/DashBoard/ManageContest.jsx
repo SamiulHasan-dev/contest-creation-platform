@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { FaRegCommentDots, FaTrashAlt } from "react-icons/fa";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import Swal from "sweetalert2";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const ManageContest = () => {
     const axiosSecure = useAxiosSecure();
@@ -15,6 +15,8 @@ const ManageContest = () => {
     });
 
     const [selectedContest, setSelectedContest] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
 
     const handleComment = async(event) => {
         event.preventDefault();
@@ -48,9 +50,7 @@ const ManageContest = () => {
         }
     }
 
-
-    const handleConfirm = async(contest) =>{
-
+    const handleConfirm = async(contest) => {
         const status = 'confirm';
         const newStatus = { status };
 
@@ -104,6 +104,31 @@ const ManageContest = () => {
         });
     }
 
+    // Pagination logic
+    const [filteredContests, setFilteredContests] = useState([]);
+    useEffect(() => {
+        setFilteredContests(contests);
+    }, [contests]);
+
+    const totalPages = Math.ceil(filteredContests.length / itemsPerPage);
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentContests = filteredContests.slice(indexOfFirstItem, indexOfLastItem);
+
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const renderPageNumbers = () => {
+        const pageNumbers = [];
+        for (let i = 1; i <= totalPages; i++) {
+            pageNumbers.push(
+                <button key={i} onClick={() => handlePageChange(i)} className={`btn ${currentPage === i ? 'btn-active' : ''}`}>{i}</button>
+            );
+        }
+        return pageNumbers;
+    };
+
     return (
         <div>
             <h2 className="text-4xl font-extrabold my-2">Manage Contest {contests.length}</h2>
@@ -122,9 +147,9 @@ const ManageContest = () => {
                         </thead>
                         <tbody>
                             {
-                                contests.map((contest, index) => (
+                                currentContests.map((contest, index) => (
                                     <tr key={contest._id}>
-                                        <th>{index + 1}</th>
+                                        <th>{indexOfFirstItem + index + 1}</th>
                                         <td>{contest.contestName}</td>
                                         <td>{contest.contestType}</td>
                                         <td>
@@ -182,6 +207,16 @@ const ManageContest = () => {
                             }
                         </tbody>
                     </table>
+                </div>
+                {/* Pagination Controls */}
+                <div className="flex justify-center mt-4">
+                    <div className="btn-group">
+                        <button onClick={() => handlePageChange(1)} className={`btn ${currentPage === 1 ? 'btn-disabled' : ''}`}>&lt;&lt;</button>
+                        <button onClick={() => handlePageChange(currentPage - 1)} className={`btn ${currentPage === 1 ? 'btn-disabled' : ''}`}>&lt;</button>
+                        {renderPageNumbers()}
+                        <button onClick={() => handlePageChange(currentPage + 1)} className={`btn ${currentPage === totalPages ? 'btn-disabled' : ''}`}>&gt;</button>
+                        <button onClick={() => handlePageChange(totalPages)} className={`btn ${currentPage === totalPages ? 'btn-disabled' : ''}`}>&gt;&gt;</button>
+                    </div>
                 </div>
             </div>
         </div>

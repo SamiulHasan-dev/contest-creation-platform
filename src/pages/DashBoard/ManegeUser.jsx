@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 const ManegeUser = () => {
     const [searchText, setSearchText] = useState('');
     const [filteredQueries, setFilteredQueries] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
 
     const axiosSecure = useAxiosSecure();
     const { data: users = [], refetch } = useQuery({
@@ -91,6 +93,16 @@ const ManegeUser = () => {
         setSearchText(text);
     };
 
+    // Pagination logic
+    const handlePageChange = (pageNumber) => {
+        setCurrentPage(pageNumber);
+    };
+
+    const indexOfLastItem = currentPage * itemsPerPage;
+    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+    const currentUsers = filteredQueries.slice(indexOfFirstItem, indexOfLastItem);
+    const totalPages = Math.ceil(filteredQueries.length / itemsPerPage);
+
     return (
         <div>
             <div className="flex justify-start my-2">
@@ -127,7 +139,7 @@ const ManegeUser = () => {
                         </thead>
                         <tbody>
                             {
-                                filteredQueries.map((user, index) => <tr key={user._id}>
+                                currentUsers.map((user, index) => <tr key={user._id}>
                                     <th>{index + 1}</th>
                                     <td>{user.name}</td>
                                     <td>{user.email}</td>
@@ -155,10 +167,19 @@ const ManegeUser = () => {
                         </tbody>
                     </table>
                 </div>
+                {/* Pagination Controls */}
+                <div className="flex justify-center mt-4">
+                    <div className="btn-group">
+                        <button onClick={() => handlePageChange(1)} className={`btn ${currentPage === 1 ? 'btn-disabled' : ''}`}>&lt;&lt;</button>
+                        {Array.from({ length: totalPages }, (_, i) => (
+                            <button key={i + 1} onClick={() => handlePageChange(i + 1)} className={`btn ${currentPage === i + 1 ? 'btn-active' : ''}`}>{i + 1}</button>
+                        ))}
+                        <button onClick={() => handlePageChange(totalPages)} className={`btn ${currentPage === totalPages ? 'btn-disabled' : ''}`}>&gt;&gt;</button>
+                    </div>
+                </div>
             </div>
         </div>
     );
 };
 
 export default ManegeUser;
-

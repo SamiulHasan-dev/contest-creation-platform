@@ -38,10 +38,14 @@ const NavBar = () => {
                 </NavLink>
             </li>
             <li>
-                <a>Sectors</a>
+                <NavLink className={({ isActive }) => (isActive ? 'font-bold ' : 'font-normal')} to="/sectors">
+                    Sectors
+                </NavLink>
             </li>
             <li>
-                <a>Services</a>
+            <NavLink className={({ isActive }) => (isActive ? 'font-bold ' : 'font-normal')} to="/services">
+                    Services
+                </NavLink>
             </li>
         </>
     );

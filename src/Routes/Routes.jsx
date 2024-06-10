@@ -19,6 +19,9 @@ import MyParticipation from "../pages/DashBoard/MyParticipation";
 import SubmitContests from "../pages/AllContest/SubmitContests/SubmitContests";
 import ShowSubmission from "../pages/ShowSubmission/ShowSubmission";
 import WinningContest from "../pages/DashBoard/WinningContest";
+import Sectors from "../pages/Sectors/Sectors";
+import Service from "../pages/Service/Service";
+import AdminRoute from "./AdminRoute"
 
 
 
@@ -45,24 +48,32 @@ export const router = createBrowserRouter([
       },
       {
         path: '/contestDetails/:id',
-        element: <ContestDetails></ContestDetails>,
+        element: <PrivateRoute><ContestDetails></ContestDetails></PrivateRoute>,
         loader: ({params})=> fetch(`http://localhost:5000/contest/${params.id}`)
       },
       {
         path: '/payment/:id',
-        element: <Payment></Payment>,
+        element: <PrivateRoute><Payment></Payment></PrivateRoute>,
         loader: ({params})=> fetch(`http://localhost:5000/contest/${params.id}`)
       },
+      {
+        path: '/sectors',
+        element: <Sectors></Sectors>
+      },
+      {
+        path: '/services',
+        element: <Service></Service>
+      }
       
     ]
   },
   {
     path: '/dashboard',
-    element: <DashBoard></DashBoard>,
+    element: <PrivateRoute><DashBoard></DashBoard></PrivateRoute>,
     children:[
       {
         path: 'addContest',
-        element: <AddContest></AddContest>
+        element: <PrivateRoute><AddContest></AddContest></PrivateRoute>
       },
       {
         path: 'createdContest',
@@ -75,39 +86,39 @@ export const router = createBrowserRouter([
       },
       {
         path: 'contestSubmitted',
-        element: <ContestSubmitted></ContestSubmitted>
+        element: <PrivateRoute><ContestSubmitted></ContestSubmitted></PrivateRoute>
       },
       //admin
       {
         path: 'manageUser',
-        element: <ManegeUser></ManegeUser>
+        element: <AdminRoute><ManegeUser></ManegeUser></AdminRoute>
       },
       {
         path: 'manageContest',
-        element: <ManageContest></ManageContest>,
+        element: <AdminRoute><ManageContest></ManageContest></AdminRoute>,
       },
       //user
       {
         path: 'myProfile',
-        element: <MyProfile></MyProfile>
+        element: <PrivateRoute><MyProfile></MyProfile></PrivateRoute>
       },
       {
         path: 'participatedContest',
-        element: <MyParticipation></MyParticipation>
+        element: <PrivateRoute><MyParticipation></MyParticipation></PrivateRoute>
       },
       {
         path: 'participatedContest/submit/:id',
-        element: <SubmitContests></SubmitContests>,
+        element: <PrivateRoute><SubmitContests></SubmitContests></PrivateRoute>,
         loader: ({params})=> fetch(`http://localhost:5000/paymentSingle/${params.id}`)
       },
       {
         path: 'contestSubmitted/showSubmission/:contestId',
-        element: <ShowSubmission></ShowSubmission>,
+        element: <PrivateRoute><ShowSubmission></ShowSubmission></PrivateRoute>,
         loader: ({params})=> fetch(`http://localhost:5000/paymentSubmit/${params.contestId}`)
       },
       {
         path: 'winningContest',
-        element: <WinningContest></WinningContest>
+        element: <PrivateRoute><WinningContest></WinningContest></PrivateRoute>
       }
     ]
   }

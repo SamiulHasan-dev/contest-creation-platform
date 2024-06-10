@@ -5,12 +5,30 @@ import 'animate.css';
 import useAuth from "../../hooks/useAuth";
 import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { FaGoogle } from "react-icons/fa";
+import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
+import { useEffect, useState } from "react";
 
 const SignUp = () => {
     const { register, handleSubmit, formState: { errors } } = useForm();
     const { createUser, updateUserProfile, googleSignIn } = useAuth();
     const navigate = useNavigate();
     const axiosPublic = useAxiosPublic();
+
+    const [disabled, setDisable] = useState(true);
+
+    useEffect(() => {
+        loadCaptchaEnginge(4);
+    }, [])
+
+    const handleValidateCaptcha = (e) => {
+        const user_captcha_value = e.target.value;
+        if (validateCaptcha(user_captcha_value)) {
+            setDisable(false);
+        }
+        else {
+            setDisable(true);
+        }
+    }
 
     const onSubmit = data => {
         console.log(data);
@@ -116,8 +134,15 @@ const SignUp = () => {
                                 {errors.password?.type === "maxLength" && (<p className="text-red-600">Password must be less than 20 characters</p>)}
                                 {errors.password?.type === "pattern" && (<p className="text-red-600">Password must have one upper case, one lower case, one number and one special characters</p>)}
                             </div>
+                            <div className="form-control">
+                                <label className="label">
+                                    <LoadCanvasTemplate />
+                                </label>
+                                <input type="text" onBlur={handleValidateCaptcha} name="captcha" placeholder="type the captcha above" className="input input-bordered" required />
+                            </div>
                             <div className="form-control mt-6">
-                                <input className="btn bg-[#118acb] text-white" type="submit" value="Sign Up" />
+                                <input disabled={disabled}
+                                    className="btn bg-[#118acb] text-white" type="submit" value="Sign Up" />
                             </div>
                         </form>
                         <div className="w-full px-7">
