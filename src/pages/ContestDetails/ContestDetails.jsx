@@ -11,7 +11,7 @@ const ContestDetails = () => {
     const [winnerContests, setWinnerContests] = useState();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/paymentSubmit/${contests._id}`)
+        fetch(`https://contest-lab-server.vercel.app/paymentSubmit/${contests._id}`)
             .then(res => res.json())
             .then(data => setWinnerContests(data[0]?.winner))
     }, [])

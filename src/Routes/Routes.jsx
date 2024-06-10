@@ -21,7 +21,9 @@ import ShowSubmission from "../pages/ShowSubmission/ShowSubmission";
 import WinningContest from "../pages/DashBoard/WinningContest";
 import Sectors from "../pages/Sectors/Sectors";
 import Service from "../pages/Service/Service";
-import AdminRoute from "./AdminRoute"
+import AdminRoute from "./AdminRoute";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
+
 
 
 
@@ -29,6 +31,7 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: '/',
@@ -49,12 +52,12 @@ export const router = createBrowserRouter([
       {
         path: '/contestDetails/:id',
         element: <PrivateRoute><ContestDetails></ContestDetails></PrivateRoute>,
-        loader: ({params})=> fetch(`http://localhost:5000/contest/${params.id}`)
+        loader: ({params})=> fetch(`https://contest-lab-server.vercel.app/contest/${params.id}`)
       },
       {
         path: '/payment/:id',
         element: <PrivateRoute><Payment></Payment></PrivateRoute>,
-        loader: ({params})=> fetch(`http://localhost:5000/contest/${params.id}`)
+        loader: ({params})=> fetch(`https://contest-lab-server.vercel.app/contest/${params.id}`)
       },
       {
         path: '/sectors',
@@ -82,7 +85,7 @@ export const router = createBrowserRouter([
       {
         path: 'createdContest/update/:id',
         element: <PrivateRoute><Update></Update></PrivateRoute>,
-        loader: ({params})=> fetch(`http://localhost:5000/contest/${params.id}`)
+        loader: ({params})=> fetch(`https://contest-lab-server.vercel.app/contest/${params.id}`)
       },
       {
         path: 'contestSubmitted',
@@ -109,12 +112,12 @@ export const router = createBrowserRouter([
       {
         path: 'participatedContest/submit/:id',
         element: <PrivateRoute><SubmitContests></SubmitContests></PrivateRoute>,
-        loader: ({params})=> fetch(`http://localhost:5000/paymentSingle/${params.id}`)
+        loader: ({params})=> fetch(`https://contest-lab-server.vercel.app/paymentSingle/${params.id}`)
       },
       {
         path: 'contestSubmitted/showSubmission/:contestId',
         element: <PrivateRoute><ShowSubmission></ShowSubmission></PrivateRoute>,
-        loader: ({params})=> fetch(`http://localhost:5000/paymentSubmit/${params.contestId}`)
+        loader: ({params})=> fetch(`https://contest-lab-server.vercel.app/paymentSubmit/${params.contestId}`)
       },
       {
         path: 'winningContest',
